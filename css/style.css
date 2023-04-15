@@ -52,7 +52,6 @@ h1 {
     font-weight: 400;
     margin : 5px 0px;
 }
-
 .photographer_section article a img {
     height: 200px;
     width: 200px;
@@ -60,6 +59,11 @@ h1 {
     object-fit: cover;
     object-position: center;
     overflow-clip-margin: inherit;
+}
+.align-information{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 .Plocation{
     color: #901C1C;
