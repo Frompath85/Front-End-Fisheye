@@ -6,6 +6,44 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.photograph-photo{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow-clip-margin: inherit;
+}
+.photograph-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.photograph-information h1{
+    font-size: 64PX;
+    font-weight: 400;
+    color: #D3573C;
+    margin: 0px ;
+    padding: 0px 0px 10px 0px;
+}
+.photograph-information p{
+    color: #901C1C;
+    font-size: 24PX;
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px 0px 8px 0px;
+}
+.photograph-information span{
+    color: #525252;
+    font-size: 18PX;
+    font-weight: 400;
+    margin: 0px;
+    padding: 7px 0px;
 }
 
 .contact_button {
@@ -19,6 +57,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 45px;
 }
 
 .modal {
