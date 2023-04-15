@@ -38,13 +38,41 @@ h1 {
     align-items: center;
     flex-direction: column;
 }
-
-.photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+.photographer_section article a{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.photographer_section article img {
+.photographer_section article a h2 {
+    color: #D3573C;
+    font-size: 36px;
+    font-weight: 400;
+    margin : 5px 0px;
+}
+
+.photographer_section article a img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    overflow-clip-margin: inherit;
+}
+.Plocation{
+    color: #901C1C;
+    font-size: 13px;
+    font-weight: 400;
+    margin : 3px;
+}
+.Ptagline{
+    font-size: 10px;
+    margin: 0px;
+}
+.Pprice{
+    color:#757575;
+    font-size: 9px;
+    margin: 3px;
 }
