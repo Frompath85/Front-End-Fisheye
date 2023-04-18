@@ -25,7 +25,7 @@
     align-items: flex-start;
 }
 .photograph-information h1{
-    font-size: 64PX;
+    font-size: 60PX;
     font-weight: 400;
     color: #D3573C;
     margin: 0px ;
@@ -58,6 +58,35 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 45px;
+}
+.trier-par{
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 100px;
+}
+.media-section{
+    margin: 0px 100px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, 350PX);
+    gap: 25px;   
+}
+.media-img{
+    width: 350px;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+.media-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.media-title p{
+    color: #901C1C;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 15px 0px;
 }
 
 .modal {
