@@ -7,6 +7,7 @@ function photographerFactory(data) {
         const lien = document.createElement('a');
         lien.setAttribute("href",`./photographer.html?id=${id}`);
         lien.setAttribute("aria-label", `Lien vers la page de :${name}` );
+        lien.setAttribute("tabindex","3");
         
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
@@ -17,6 +18,7 @@ function photographerFactory(data) {
 
         const div = document.createElement('div');
         div.setAttribute("class","align-information");
+        div.setAttribute("tabindex","3");
 
         const Plocation = document.createElement('p');//localisation
         Plocation.setAttribute("class","Plocation");
@@ -42,5 +44,53 @@ function photographerFactory(data) {
     }
 
    return { name, picture, getUserCardDOM }
+}
 
+function MediaFactory(media, nameOfPhotographe){
+    //je recupère un tableau de clé des données 
+        const props= Object.keys(media);
+
+        const article = document.createElement("article");
+        article.setAttribute("class","photograph-article");
+
+        //je teste le type du media
+        if (props[3]== "image"){
+            const img = document.createElement("img");
+            img.setAttribute("class", "media-img");
+            img.setAttribute("src",`assets/images/${nameOfPhotographe}/${media.image}`);
+            article.appendChild(img);
+        }
+        else if (props[3]== "video"){
+            const video = document.createElement("video");
+            video.setAttribute("class", "media-img");
+            const source = document.createElement("source");
+            source.setAttribute("src",`assets/images/${nameOfPhotographe}/${media.video}`);
+            source.setAttribute("type","video/mp4");
+            video.appendChild(source);
+            article.appendChild(video);
+        }
+        const div = document.createElement("div");
+        div.setAttribute("class","media-title");
+
+        const pTitle = document.createElement("p");
+        pTitle.setAttribute("class","title")
+        pTitle.textContent = media.title;
+
+        const divLikes = document.createElement("div");
+        divLikes.setAttribute("class","media-likes");
+
+        const pLikes = document.createElement("p");
+        pLikes.setAttribute("class","likes")
+        pLikes.textContent = media.likes;
+
+        const iconHeart = document.createElement("i");
+        iconHeart.setAttribute("class","fa-solid fa-heart");
+
+        divLikes.appendChild(pLikes);
+        divLikes.appendChild(iconHeart);
+        div.appendChild(pTitle);
+        div.appendChild(divLikes);
+        article.appendChild(div);
+
+  return article;
 }
