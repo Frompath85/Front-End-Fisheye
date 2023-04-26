@@ -178,3 +178,43 @@ form textarea {
     border-radius: 5px;
     font-size: 30px;
 }
+form span{
+    color: #FAFAFA;
+    font-size: 25px;
+}
+.ErrPrenom{
+    display: none;
+}
+.ErrNom{
+    display: none;
+}
+.ErrEmail{
+    display: none;
+}
+.ErrMessage{
+    display: none;
+}
+.encart-likes{
+    background-color: #DB8876;
+   
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    width: 380px;
+    height: 89px;
+    position: fixed;
+    z-index: 1;
+    right: 25px;
+    bottom: -15px;
+    border-radius: 5px;
+}
+.encart-likes div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.encart-likes p, i {
+    font-size: 24px;
+    font-weight: 500;
+    color: black;
+}
