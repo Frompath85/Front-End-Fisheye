@@ -58,11 +58,13 @@ function MediaFactory(media, nameOfPhotographe){
             const img = document.createElement("img");
             img.setAttribute("class", "media-img");
             img.setAttribute("src",`assets/images/${nameOfPhotographe}/${media.image}`);
+            img.setAttribute("tabindex","7");
             article.appendChild(img);
         }
         else if (props[3]== "video"){
             const video = document.createElement("video");
             video.setAttribute("class", "media-img");
+            video.setAttribute("tabindex","7");
             const source = document.createElement("source");
             source.setAttribute("src",`assets/images/${nameOfPhotographe}/${media.video}`);
             source.setAttribute("type","video/mp4");
@@ -73,7 +75,8 @@ function MediaFactory(media, nameOfPhotographe){
         div.setAttribute("class","media-title");
 
         const pTitle = document.createElement("p");
-        pTitle.setAttribute("class","title")
+        pTitle.setAttribute("class","title");
+        pTitle.setAttribute("tabindex","7");
         pTitle.textContent = media.title;
 
         const divLikes = document.createElement("div");
@@ -81,10 +84,21 @@ function MediaFactory(media, nameOfPhotographe){
 
         const pLikes = document.createElement("p");
         pLikes.setAttribute("class","likes")
+        pLikes.setAttribute("tabindex","7");
         pLikes.textContent = media.likes;
 
         const iconHeart = document.createElement("i");
         iconHeart.setAttribute("class","fa-solid fa-heart");
+        iconHeart.addEventListener("click",() => {
+                  pLikes.innerHTML ++;
+                  const AllLikes = document.getElementById("Likes");
+                  AllLikes.innerHTML ++; 
+                 });
+       iconHeart.addEventListener("mouseenter",() => { 
+            iconHeart.style.cursor = "pointer";    
+            iconHeart.setAttribute("class","fa-solid fa-heart-circle-plus") });
+       iconHeart.addEventListener("mouseleave",() => { 
+            iconHeart.setAttribute("class","fa-solid fa-heart") });       
 
         divLikes.appendChild(pLikes);
         divLikes.appendChild(iconHeart);
