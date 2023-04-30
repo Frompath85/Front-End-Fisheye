@@ -89,6 +89,35 @@ initMedia();
   let LastTypeMedia ="";
   let LastLinkMedia = "";
   let LastTitleMedia = "";
+  let isLightboxOpen = false
+
+const lightboxNext = document.querySelector(".lightbox_next");
+lightboxNext.addEventListener("click", (e) =>{ 
+      NextMedia();
+});
+
+const lightboxPrev = document.querySelector(".lightbox_prev");
+lightboxPrev.addEventListener("click", (e) =>{ 
+     PreviousMedia()
+});
+
+const lightboxClose = document.querySelector(".lightbox_close");
+lightboxClose.addEventListener("click",(e) =>{
+  CloseLightbox();
+});
+
+const body2 = document.querySelector('body')
+body2.addEventListener('keydown', (e) => {
+    if(e.key == "Escape" && isLightboxOpen){
+      CloseLightbox();
+    }
+    if(e.key == "ArrowRight" && isLightboxOpen){
+      NextMedia();
+    }
+    if(e.key == "ArrowLeft" && isLightboxOpen){
+      PreviousMedia();
+    }
+})
 
 function loadImage(TypeMedia, LinkMedia, TitleMedia ){
 
@@ -111,50 +140,41 @@ function loadImage(TypeMedia, LinkMedia, TitleMedia ){
   LastTypeMedia =TypeMedia;
   LastLinkMedia = LinkMedia;
   LastTitleMedia = TitleMedia; 
+  isLightboxOpen = true;
   //console.log(LastTypeMedia +" * "+LastLinkMedia+" * "+LastTitleMedia)
 }
 
-const lightboxNext = document.querySelector(".lightbox_next");
-lightboxNext.addEventListener("click", (e) =>{ 
-  
+function NextMedia(){
   // je recupere un tableau contient tout les liens des medias
-  const AllMediaImg = Array.from(document.querySelectorAll(".media-img"));
-  const ArrayLink = AllMediaImg.map(link => link.getAttribute("Src"));
+   const AllMediaImg = Array.from(document.querySelectorAll(".media-img"));
+   const ArrayLink = AllMediaImg.map(link => link.getAttribute("Src"));
+ 
+   //difinir l'index de l'image en cours
+   let pos = ArrayLink.findIndex( i => i == LastLinkMedia );
+   if(pos == ArrayLink.length-1){ pos =-1}
+ 
+   // je recupère un tableau contient tous les titres
+   const data = document.querySelectorAll(".title")
+ 
+   //console.log(AllMediaImg[pos+1].tagName);//renvoi IMG ou VIDEO
+ 
+    loadImage(AllMediaImg[pos+1].tagName, ArrayLink[pos+1], data[pos+1].textContent)
+}
 
-  //difinir l'index de l'image en cours
-  let pos = ArrayLink.findIndex( i => i == LastLinkMedia );
-  if(pos == ArrayLink.length-1){ pos =-1}
-
-  // je recupère un tableau contient tous les titres
-  const data = document.querySelectorAll(".title")
-
-  //console.log(AllMediaImg[pos+1].tagName);//renvoi IMG ou VIDEO
-
-   loadImage(AllMediaImg[pos+1].tagName, ArrayLink[pos+1], data[pos+1].textContent)
-
-});
-
-const lightboxPrev = document.querySelector(".lightbox_prev");
-lightboxPrev.addEventListener("click", (e) =>{ 
-
-  const AllMediaImg = Array.from(document.querySelectorAll(".media-img"));
-  const ArrayLink = AllMediaImg.map(link => link.getAttribute("Src"));
-
-  let pos = ArrayLink.findIndex( i => i == LastLinkMedia );
-  if(pos == 0){ pos = ArrayLink.length}
-
-  const data = document.querySelectorAll(".title")
-
-   loadImage(AllMediaImg[pos-1].tagName, ArrayLink[pos-1], data[pos-1].textContent)
-
-});
-
-const lightboxClose = document.querySelector(".lightbox_close");
-lightboxClose.addEventListener("click",(e) =>{
-  CloseLightbox();
-})
+function PreviousMedia(){
+ 
+   const AllMediaImg = Array.from(document.querySelectorAll(".media-img"));
+   const ArrayLink = AllMediaImg.map(link => link.getAttribute("Src"));
+   let pos = ArrayLink.findIndex( i => i == LastLinkMedia );
+   if(pos == 0){ pos = ArrayLink.length}
+   const data = document.querySelectorAll(".title")
+ 
+    loadImage(AllMediaImg[pos-1].tagName, ArrayLink[pos-1], data[pos-1].textContent)
+ 
+}
 
 function CloseLightbox(){
   const lightbox = document.querySelector(".lightbox");
   lightbox.style.display = "none";
+  isLightboxOpen=false;
 }
