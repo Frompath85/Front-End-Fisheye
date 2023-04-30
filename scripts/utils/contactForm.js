@@ -1,13 +1,18 @@
+// Création d'un booléen accessible en global
+let isModalOpen = false;
+
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     const MyForm = document.getElementById("Myform");
     MyForm.reset();
 	modal.style.display = "block";
+    isModalOpen = true;
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
+    isModalOpen = false;
 }
 
 async function contactPhotographer(){// afficher le nom sur la modale de contact
@@ -77,3 +82,23 @@ function envoyer(){//je ferme la modale que si les champs sont correct
     console.log("données validés, fermeture de la modale");
     closeModal();
 }          
+
+const closeIcon = document.querySelector('#closeIcon')
+closeIcon.addEventListener("keydown", (e) => {
+   if(e.key == "Enter"){ 
+    closeModal();
+   }
+   if(e.key == "Tab"){
+    document.querySelector('.modal').focus();
+   }
+})
+closeIcon.addEventListener("click",() =>{
+    closeModal();
+})
+
+const body = document.querySelector('body')
+body.addEventListener('keydown', (e) => {
+    if(e.key == "Escape" && isModalOpen){
+        closeModal();
+    }
+})
