@@ -99,17 +99,22 @@ function MediaFactory(media, nameOfPhotographe){
         const iconHeart = document.createElement("i");
         iconHeart.setAttribute("class","fa-solid fa-heart");
         iconHeart.setAttribute("tabindex","7");
-        iconHeart.addEventListener("click, keydown",(e) => {
-                  pLikes.innerHTML ++;
-                  const AllLikes = document.getElementById("Likes");
-                  AllLikes.innerHTML ++; 
-                  // si click ou keydown = Enter
-                 });
-        // Tu ajoutes un autre écouteur d'évènement pour le keydown
-       iconHeart.addEventListener("mouseenter",() => { 
+      //  ajout des likes au click et au clavier
+        const AllLikes = document.getElementById("Likes");
+        iconHeart.addEventListener("click",(e) => {
+                pLikes.innerHTML ++;
+                AllLikes.innerHTML ++; 
+        });
+        iconHeart.addEventListener("keydown",(e) => {
+            if(e.key == "Enter"){
+                pLikes.innerHTML ++;
+                AllLikes.innerHTML ++; 
+            }
+        });
+        iconHeart.addEventListener("mouseenter",() => { 
             iconHeart.style.cursor = "pointer";    
             iconHeart.setAttribute("class","fa-solid fa-heart-circle-plus") });
-       iconHeart.addEventListener("mouseleave",() => { 
+        iconHeart.addEventListener("mouseleave",() => { 
             iconHeart.setAttribute("class","fa-solid fa-heart") });       
 
         divLikes.appendChild(pLikes);
