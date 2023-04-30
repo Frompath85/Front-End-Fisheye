@@ -14,8 +14,16 @@
     </header>
     <main id="main">
       <div class="photograph-header">
+        <!-- Afficahe des informations du photographe -->
       </div>   
-      <p tabindex="5" class="trier-par">Trier par </p>
+      <div class="sort-section">
+        <p tabindex="5">Trier par </p>
+        <select tabindex="6" name="Trier" id="trier-par">
+          <option value="popularite" selected>Popularité</option>
+          <option value="date">Date</option>
+          <option value="Titre">Titre</option>
+        </select>
+      </div>
       <section class="media-section">
         <!-- affichage des medias du photographe -->
       </section>
@@ -23,13 +31,14 @@
        <!-- affichage de l'encart des Likes -->
       </div>
     </main>
-    <div id="contact_modal" tabindex="-1">
+
+    <div id="contact_modal" tabindex="-1">   <!--contact Modal -->
 			<div class="modal" tabindex="1">
 				<header >
           <h2 tabindex="1" id="name_photographer">Contactez-moi <br></h2>
-          <img  tabindex="2" src="assets/icons/close.svg" onclick="closeModal()" />
+          <img id="closeIcon" tabindex="2" src="assets/icons/close.svg" />
         </header>
-
+        
 				<form id="Myform">
 					<div >
 						<label tabindex="1" for="prenom">Prénom</label>
@@ -55,6 +64,20 @@
 				</form>
 			</div>
 		</div>
+
+    <div class="lightbox">
+      <button class="lightbox_close"><i class="fa-solid fa-xmark button_lightbox"></i></button>
+      <button class="lightbox_next"><i class="fa-solid fa-angle-right button_lightbox"></i></button>
+      <button class="lightbox_prev"><i class="fa-solid fa-angle-left button_lightbox"></i></button>
+      <div class="lightbox_img_container">
+        <img class="lightbox_img" src="" alt="">
+        <video class="lightbox_video" controls src="" >
+        
+        </video>
+      </div>
+      <p class="lightbox_description">descrition de l'image ici </p>
+    </div>
+
     <script src="/scripts/factories/photographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>

@@ -59,11 +59,6 @@
     cursor: pointer;
     margin-top: 45px;
 }
-.trier-par{
-    font-size: 18px;
-    font-weight: 700;
-    margin-left: 100px;
-}
 .media-section{
     margin: 0px 100px;
     display: grid;
@@ -196,7 +191,6 @@ form span{
 }
 .encart-likes{
     background-color: #DB8876;
-   
     display: flex;
     justify-content: space-around;
     align-items: start;
@@ -217,4 +211,96 @@ form span{
     font-size: 24px;
     font-weight: 500;
     color: black;
+}
+/*********************** section trier par  */
+.sort-section{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.sort-section p{
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 100px;
+}
+.sort-section select{
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: #901C1C;
+    margin: 15px 0px;
+    width: 180px;
+    border-radius: 5px;
+}
+.sort-section option{
+    padding: 10px 0px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: #901C1C;
+    width: 180px;
+    border-radius: 5px;
+}
+/*********************** section lightbox  */
+.lightbox{
+    position: fixed;
+    top: 0px;
+    left : 0px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    display: none;
+}
+.lightbox_next{
+    position: absolute;
+    background-color: white;
+    border: none;
+    top: 40%;
+    right: 20px;
+    width: 50px;
+    height: 100px;
+}
+.lightbox_prev{
+    position: absolute;
+    background-color: white;
+    border: none;
+    top: 40%;
+    left: 20px;
+    width: 50px;
+    height: 100px;
+}
+.lightbox_close{
+    position: absolute;
+    background-color: white;
+    border: none;
+    top: 10px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+}
+.button_lightbox{
+    color: #901C1C;
+    font-size: 40px;
+}
+.lightbox_img_container{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    padding: 20px;
+}
+.lightbox_img , .lightbox_video{
+   max-width: 85%;
+   max-height: 88%;
+   object-fit: contain;
+   object-position: center;
+}
+.lightbox_description{
+    font-size: 24px;
+    font-weight: 400;
+    color: #901C1C;
+    position: absolute;
+    left: 80px;
+    bottom: 11px;
 }

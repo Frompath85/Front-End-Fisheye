@@ -46,30 +46,40 @@ function photographerFactory(data) {
    return { name, picture, getUserCardDOM }
 }
 
-function MediaFactory(media, nameOfPhotographe){
+function MediaFactory(media, nameOfPhotographe){  
     //je recupère un tableau de clé des données 
         const props= Object.keys(media);
-
         const article = document.createElement("article");
         article.setAttribute("class","photograph-article");
+        const TypeMedia = props[3];
 
+        const lightbox = document.querySelector(".lightbox");
+        
         //je teste le type du media
-        if (props[3]== "image"){
+        if (TypeMedia== "image"){
             const img = document.createElement("img");
-            img.setAttribute("class", "media-img");
-            img.setAttribute("src",`assets/images/${nameOfPhotographe}/${media.image}`);
+            const LinkImage = `assets/images/${nameOfPhotographe}/${media.image}`;
+            img.setAttribute("class", "media-img");          
+            img.setAttribute("src", LinkImage);
             img.setAttribute("tabindex","7");
             article.appendChild(img);
+            img.addEventListener("click",() =>{
+                lightbox.style.display = "block";
+                loadImage(TypeMedia, LinkImage , media.title);
+            })
+           
         }
-        else if (props[3]== "video"){
+        else if (TypeMedia== "video"){
             const video = document.createElement("video");
+            const LinkVideo = `assets/images/${nameOfPhotographe}/${media.video}`;
             video.setAttribute("class", "media-img");
             video.setAttribute("tabindex","7");
-            const source = document.createElement("source");
-            source.setAttribute("src",`assets/images/${nameOfPhotographe}/${media.video}`);
-            source.setAttribute("type","video/mp4");
-            video.appendChild(source);
+            video.setAttribute("src",LinkVideo);
             article.appendChild(video);
+            video.addEventListener("click",() =>{ 
+                lightbox.style.display = "block";
+                loadImage(TypeMedia, LinkVideo , media.title);
+            })
         }
         const div = document.createElement("div");
         div.setAttribute("class","media-title");
@@ -84,16 +94,18 @@ function MediaFactory(media, nameOfPhotographe){
 
         const pLikes = document.createElement("p");
         pLikes.setAttribute("class","likes")
-        pLikes.setAttribute("tabindex","7");
         pLikes.textContent = media.likes;
 
         const iconHeart = document.createElement("i");
         iconHeart.setAttribute("class","fa-solid fa-heart");
-        iconHeart.addEventListener("click",() => {
+        iconHeart.setAttribute("tabindex","7");
+        iconHeart.addEventListener("click, keydown",(e) => {
                   pLikes.innerHTML ++;
                   const AllLikes = document.getElementById("Likes");
                   AllLikes.innerHTML ++; 
+                  // si click ou keydown = Enter
                  });
+        // Tu ajoutes un autre écouteur d'évènement pour le keydown
        iconHeart.addEventListener("mouseenter",() => { 
             iconHeart.style.cursor = "pointer";    
             iconHeart.setAttribute("class","fa-solid fa-heart-circle-plus") });
@@ -106,5 +118,6 @@ function MediaFactory(media, nameOfPhotographe){
         div.appendChild(divLikes);
         article.appendChild(div);
 
-  return article;
+  return article ;
 }
+
