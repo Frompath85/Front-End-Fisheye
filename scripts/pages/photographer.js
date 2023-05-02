@@ -75,9 +75,64 @@ async function displaymedia(dataMedia){
 
 async function initMedia() {
   const dataMedia  = await getAllMedia();
+  //dataMedia.sort((a,b) => b.likes - a.likes );// par defaut les media sont triés par popularité
   displaymedia(dataMedia);
 }
 initMedia();
+//******************************Fonction de Trie */
+
+const TrierPar = document.getElementById("trier-par");
+
+TrierPar.addEventListener("change", async () =>{
+  const dataMedia  =  await getAllMedia();
+  const {name} = await getOnePhotographer();
+  //console.log(dataMedia)
+
+    switch(TrierPar.value){
+        case 'popularite':
+          dataMedia.sort((a,b) => b.likes - a.likes );
+          console.log(dataMedia)
+          
+         changeBysort(dataMedia, name);
+        break;
+        case 'date':
+
+            console.log("trier par date")
+        break;
+        case 'titre':
+          console.log("trier par titre")
+        break;
+    }
+ 
+});
+
+// une fonction qui change la disposition des données
+function changeBysort(dataMedia, nameOfPhotographe){
+      //DOM
+      const LienImage = document.querySelectorAll('.media-img');
+      const LienVideo = document.querySelectorAll('.media-video');
+      const TitreMedia = document.querySelectorAll(".title");
+      const LikeMedia = document.querySelectorAll('.likes');
+      
+    for(let i = 0; i < dataMedia.length; i++){
+      const TypeMedia = Object.keys(dataMedia[i]);
+      console.log(TypeMedia[3])
+
+      if(TypeMedia[3] == "image"){
+        LienImage[i].style.display = "block";
+        LienVideo[i].style.display = "none";
+        LienImage[i].src = `assets/images/${nameOfPhotographe}/${dataMedia[i].image}`;
+      }
+      else if(TypeMedia[3] == "video"){
+        LienImage[i].style.display = "none";
+        LienVideo[i].style.display = "block";
+        LienVideo[i].src = `assets/images/${nameOfPhotographe}/${dataMedia[i].video}`;
+      }
+      TitreMedia[i].textContent = dataMedia[i].title;
+      LikeMedia[i].textContent = dataMedia[i].likes;
+      
+    } 
+}
 
 // ********************** LIGHTBOX ****************************
  //DOM Lightbox
@@ -89,7 +144,7 @@ initMedia();
   let LastTypeMedia ="";
   let LastLinkMedia = "";
   let LastTitleMedia = "";
-  let isLightboxOpen = false
+  let IsLightboxOpen = false
 
 const lightboxNext = document.querySelector(".lightbox_next");
 lightboxNext.addEventListener("click", (e) =>{ 
@@ -108,18 +163,18 @@ lightboxClose.addEventListener("click",(e) =>{
 
 const body2 = document.querySelector('body')
 body2.addEventListener('keydown', (e) => {
-    if(e.key == "Escape" && isLightboxOpen){
+    if(e.key == "Escape" && IsLightboxOpen){
       CloseLightbox();
     }
-    if(e.key == "ArrowRight" && isLightboxOpen){
+    if(e.key == "ArrowRight" && IsLightboxOpen){
       NextMedia();
     }
-    if(e.key == "ArrowLeft" && isLightboxOpen){
+    if(e.key == "ArrowLeft" && IsLightboxOpen){
       PreviousMedia();
     }
 })
 
-function loadImage(TypeMedia, LinkMedia, TitleMedia ){
+function loadImage(TypeMedia, LinkMedia, TitleMedia){
 
   switch (TypeMedia) {
     case 'image': case 'IMG':
@@ -140,8 +195,7 @@ function loadImage(TypeMedia, LinkMedia, TitleMedia ){
   LastTypeMedia =TypeMedia;
   LastLinkMedia = LinkMedia;
   LastTitleMedia = TitleMedia; 
-  isLightboxOpen = true;
-  //console.log(LastTypeMedia +" * "+LastLinkMedia+" * "+LastTitleMedia)
+  IsLightboxOpen = true;
 }
 
 function NextMedia(){
@@ -176,5 +230,5 @@ function PreviousMedia(){
 function CloseLightbox(){
   const lightbox = document.querySelector(".lightbox");
   lightbox.style.display = "none";
-  isLightboxOpen=false;
+  IsLightboxOpen=false;
 }

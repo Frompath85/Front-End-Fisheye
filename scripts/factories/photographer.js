@@ -54,31 +54,48 @@ function MediaFactory(media, nameOfPhotographe){
         const TypeMedia = props[3];
 
         const lightbox = document.querySelector(".lightbox");
-        
+
+        const img = document.createElement("img");
+        img.setAttribute("class", "media-img"); 
+        img.setAttribute("tabindex","7");
+        article.appendChild(img);
+
+        const video = document.createElement("video");
+        video.setAttribute("class", "media-video");
+        video.setAttribute("tabindex","7");
+        article.appendChild(video);
+
         //je teste le type du media
-        if (TypeMedia== "image"){
-            const img = document.createElement("img");
-            const LinkImage = `assets/images/${nameOfPhotographe}/${media.image}`;
-            img.setAttribute("class", "media-img");          
+        if (TypeMedia == "image"){ 
+            video.style.display= "none";
+            const LinkImage = `assets/images/${nameOfPhotographe}/${media.image}`;   
             img.setAttribute("src", LinkImage);
-            img.setAttribute("tabindex","7");
-            article.appendChild(img);
-            img.addEventListener("click",() =>{
+            
+            img.addEventListener("click",() =>{ // affichage de la lightbox par click ou au clavier
                 lightbox.style.display = "block";
                 loadImage(TypeMedia, LinkImage , media.title);
             })
-           
+            img.addEventListener("keydown",(e) => {
+                if(e.key == "Enter"){
+                    lightbox.style.display = "block";
+                    loadImage(TypeMedia, LinkImage , media.title);
+                }
+            })
         }
         else if (TypeMedia== "video"){
-            const video = document.createElement("video");
+            img.style.display= "none";
             const LinkVideo = `assets/images/${nameOfPhotographe}/${media.video}`;
-            video.setAttribute("class", "media-img");
-            video.setAttribute("tabindex","7");
-            video.setAttribute("src",LinkVideo);
-            article.appendChild(video);
-            video.addEventListener("click",() =>{ 
+            video.setAttribute("src", LinkVideo);
+            
+            video.addEventListener("click",() =>{ // affichage de la lightbox par click ou au clavier
                 lightbox.style.display = "block";
                 loadImage(TypeMedia, LinkVideo , media.title);
+            })
+            video.addEventListener("keydown",(e) => {
+                if(e.key == "Enter"){
+                    lightbox.style.display = "block";
+                    loadImage(TypeMedia, LinkVideo , media.title);
+                }
             })
         }
         const div = document.createElement("div");
