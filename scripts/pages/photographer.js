@@ -54,15 +54,17 @@ async function getAllMedia(){
 async function displaymedia(dataMedia){
 
   const {name, price} = await getOnePhotographer();//recupérer le nom du dossier contenant les medias
- 
   let NbrLikes = 0;
+
   dataMedia.forEach((media) => {//est executé 11 fois selon le nbre de media par exple
        const MediaArticle = MediaFactory(media, name);
        const MediaSection = document.querySelector(".media-section");
        MediaSection.appendChild(MediaArticle);   
        NbrLikes += media.likes;
   });
-  
+  return {NbrLikes, price} ;
+}
+function encartLikes(NbrLikes, price){
   //html de la partie encart des likes
   const codeEncart = `<div>
                         <p id="Likes"> ${NbrLikes} </p> 
@@ -70,14 +72,15 @@ async function displaymedia(dataMedia){
                       </div>
                       <p> ${price} €/jour</p>`
   document.querySelector(".encart-likes").insertAdjacentHTML('afterbegin',codeEncart);
-
 }
 
 async function initMedia() {
   const dataMedia  = await getAllMedia();
-  //dataMedia.sort((a,b) => b.likes - a.likes );// par defaut les media sont triés par popularité
-  displaymedia(dataMedia);
+  dataMedia.sort((a,b) => b.likes - a.likes );// par défaut les medias sont triés par popularité
+  const encart = await displaymedia(dataMedia);
+  encartLikes(encart.NbrLikes, encart.price);
 }
+
 initMedia();
 //******************************Fonction de Trie */
 
@@ -85,53 +88,34 @@ const TrierPar = document.getElementById("trier-par");
 
 TrierPar.addEventListener("change", async () =>{
   const dataMedia  =  await getAllMedia();
-  const {name} = await getOnePhotographer();
-  //console.log(dataMedia)
+  const initsection = document.querySelector(".media-section");
 
     switch(TrierPar.value){
-        case 'popularite':
+        case 'popularite':// selon le nbre de like
           dataMedia.sort((a,b) => b.likes - a.likes );
-          console.log(dataMedia)
-          
-         changeBysort(dataMedia, name);
+            initsection.innerHTML="";
+            displaymedia(dataMedia);
         break;
-        case 'date':
-
-            console.log("trier par date")
+        case 'date':// de la plus recente vers la plus ancienne
+          dataMedia.sort((a,b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+          initsection.innerHTML="";
+          displaymedia(dataMedia);
         break;
         case 'titre':
-          console.log("trier par titre")
+          dataMedia.sort(byName);
+          initsection.innerHTML="";
+          displaymedia(dataMedia);
         break;
     }
- 
 });
-
-// une fonction qui change la disposition des données
-function changeBysort(dataMedia, nameOfPhotographe){
-      //DOM
-      const LienImage = document.querySelectorAll('.media-img');
-      const LienVideo = document.querySelectorAll('.media-video');
-      const TitreMedia = document.querySelectorAll(".title");
-      const LikeMedia = document.querySelectorAll('.likes');
-      
-    for(let i = 0; i < dataMedia.length; i++){
-      const TypeMedia = Object.keys(dataMedia[i]);
-      console.log(TypeMedia[3])
-
-      if(TypeMedia[3] == "image"){
-        LienImage[i].style.display = "block";
-        LienVideo[i].style.display = "none";
-        LienImage[i].src = `assets/images/${nameOfPhotographe}/${dataMedia[i].image}`;
-      }
-      else if(TypeMedia[3] == "video"){
-        LienImage[i].style.display = "none";
-        LienVideo[i].style.display = "block";
-        LienVideo[i].src = `assets/images/${nameOfPhotographe}/${dataMedia[i].video}`;
-      }
-      TitreMedia[i].textContent = dataMedia[i].title;
-      LikeMedia[i].textContent = dataMedia[i].likes;
-      
-    } 
+function byName(a, b) {// par ordre alphabetique
+  if (a.title > b.title) {
+    return 1;
+  } else if (b.title > a.title) {
+    return -1;
+  } else {
+    return 0;
+  }
 }
 
 // ********************** LIGHTBOX ****************************
@@ -196,7 +180,7 @@ function loadImage(TypeMedia, LinkMedia, TitleMedia){
   LastLinkMedia = LinkMedia;
   LastTitleMedia = TitleMedia; 
   IsLightboxOpen = true;
-}
+} 
 
 function NextMedia(){
   // je recupere un tableau contient tout les liens des medias
