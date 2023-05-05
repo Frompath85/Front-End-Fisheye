@@ -9,8 +9,8 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header>
-      <a href="index.html"tabindex="-1"><img src="assets/images/logo.png" class="logo" tabindex="1" /></a>
+    <header aria-label="entête de la page">
+      <a href="index.html" tabindex="-1"><img src="assets/images/logo.png" class="logo" tabindex="1" alt="logo Fisheye" /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -18,7 +18,7 @@
       </div>   
       <div class="sort-section">
         <p tabindex="5">Trier par </p>
-        <select tabindex="6" name="Trier" id="trier-par">
+        <select tabindex="6" name="Trier" id="trier-par" aria-label="ouvre le menu déroulant de tri">
           <option value="popularite" selected>Popularité</option>
           <option value="date">Date</option>
           <option value="titre">Titre</option>
@@ -37,7 +37,7 @@
 			<div class="modal" tabindex="1">
 				<header >
           <h2 tabindex="1" id="name_photographer">Contactez-moi <br></h2>
-          <img id="closeIcon" tabindex="2" src="assets/icons/close.svg" />
+          <img id="closeIcon" tabindex="2" src="assets/icons/close.svg" alt="close modal" />
         </header>
         
 				<form id="Myform">
@@ -61,20 +61,21 @@
 						<textarea tabindex="1" id="message" name="message"></textarea>
             <span class="ErrMessage">« Veuillez entrer un message de 10 caractères minimum »</span>
 					</div>
-          <input tabindex="1" type="button" class="contact_button" value="Envoyer" onclick="envoyer()" ></input>
+          <input tabindex="1" type="button" class="contact_button" value="Envoyer" onclick="envoyer()" >
 				</form>
 			</div>
 		</div>
 
-   <div class="lightbox">                    <!--  lightBox -->
-      <button class="lightbox_close"><i class="fa-solid fa-xmark button_lightbox"></i></button>
-      <button class="lightbox_next"><i class="fa-solid fa-angle-right button_lightbox"></i></button>
-      <button class="lightbox_prev"><i class="fa-solid fa-angle-left button_lightbox"></i></button>
-      <div class="lightbox_img_container">
-        <img class="lightbox_img" src="" alt="">
-        <video class="lightbox_video" controls src="" > </video>
+    <div class="lightbox" tabindex="0" aria-label="image closeup view">                    <!--  lightBox -->
+     <div class="lightbox_img_container" tabindex="0" aria-label="vue rapproché du media">
+        <img class="lightbox_img" src="" alt="" tabindex="0">
+        <video class="lightbox_video" controls src="" tabindex="0" > </video>
       </div>
-      <p class="lightbox_description">descrition de l'image ici </p>
+      <p class="lightbox_description" tabindex="0">descrition de l'image </p>
+
+      <button class="lightbox_prev" tabindex="0" aria-label="va à l'image précédente">  <i class="fa-solid fa-angle-left button_lightbox"></i></button>
+      <button class="lightbox_next" tabindex="0" aria-label="va à l'image suivante">  <i class="fa-solid fa-angle-right button_lightbox"></i></button>
+      <button class="lightbox_close" tabindex="0" aria-label="fermeture de la lightbox">  <i class="fa-solid fa-xmark button_lightbox"></i></button>
     </div>
 
     <script src="/scripts/factories/photographer.js"></script>

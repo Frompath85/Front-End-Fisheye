@@ -62,15 +62,19 @@ function MediaFactory(media, nameOfPhotographe){
              img.setAttribute("tabindex","7");
             const LinkImage = `assets/images/${nameOfPhotographe}/${media.image}`;   
             img.setAttribute("src", LinkImage);
+            img.setAttribute("alt", `image de ${media.title}`)
+            img.setAttribute("aria-label","ouvre la vue lightBox");
             article.appendChild(img);
 
             img.addEventListener("click",() =>{ // affichage de la lightbox par click ou au clavier
                 lightbox.style.display = "block";
+                document.querySelector(".lightbox").focus();
                 loadImage(TypeMedia, LinkImage , media.title);
             })
             img.addEventListener("keydown",(e) => {
                 if(e.key == "Enter"){
                     lightbox.style.display = "block";
+                    lightbox.focus();
                     loadImage(TypeMedia, LinkImage , media.title);
                 }
             })
@@ -81,6 +85,7 @@ function MediaFactory(media, nameOfPhotographe){
             video.setAttribute("tabindex","7");
             const LinkVideo = `assets/images/${nameOfPhotographe}/${media.video}`;
             video.setAttribute("src", LinkVideo);
+            video.setAttribute("aria-label","ouvre la vue lightBox");
             article.appendChild(video);
             
             video.addEventListener("click",() =>{ // affichage de la lightbox par click ou au clavier

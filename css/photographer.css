@@ -31,14 +31,14 @@
     margin: 0px ;
     padding: 0px 0px 10px 0px;
 }
-.photograph-information p{
+.photograph-information h2{
     color: #901C1C;
     font-size: 24PX;
     font-weight: 400;
     margin: 0px;
     padding: 0px 0px 8px 0px;
 }
-.photograph-information span{
+.photograph-information p{
     color: #525252;
     font-size: 18PX;
     font-weight: 400;

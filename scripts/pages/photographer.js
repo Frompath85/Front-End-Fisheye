@@ -22,14 +22,14 @@ async function displayPhotographe(){
 
   //le Html de la partie header photograph
   const codeHeader =
-      `<section class="photograph-information">
+      `<section class="photograph-information" aria-label="nom du photographe et tarif par jour">
           <h1 tabindex="1"> ${name}</h1>
           <div tabindex="1">
-            <p>${city}, ${country}</p>
-            <span>${tagline}</span>
+            <h2>${city}, ${country}</h2>
+            <p>${tagline}</p>
           </div>
         </section>
-        <button tabindex="1" class="contact_button" onclick="displayModal()" >Contactez-moi</button>
+        <button tabindex="1" class="contact_button" onclick="displayModal()" aria-label="ouvrir la modal pour contacter le photographe" >Contactez-moi</button>
         <img  tabindex="3" class="photograph-photo" src="assets/photographers/${portrait}" alt="photos du photographe ${name}">`
             
   document.querySelector('.photograph-header')
@@ -123,6 +123,10 @@ function byName(a, b) {// par ordre alphabetique
   const lightboxImage = document.querySelector(".lightbox_img");
   const lightboxVideo = document.querySelector(".lightbox_video");
   const lightboxDescription = document.querySelector(".lightbox_description");
+  const lightboxNext = document.querySelector(".lightbox_next");
+  const lightboxPrev = document.querySelector(".lightbox_prev");
+  const lightboxClose = document.querySelector(".lightbox_close");
+  const lightbox = document.querySelector(".lightbox");
 
    //je laisse une trace du derneir Media affiché
   let LastTypeMedia ="";
@@ -130,23 +134,28 @@ function byName(a, b) {// par ordre alphabetique
   let LastTitleMedia = "";
   let IsLightboxOpen = false
 
-const lightboxNext = document.querySelector(".lightbox_next");
 lightboxNext.addEventListener("click", (e) =>{ 
-      NextMedia();
+    NextMedia();
 });
 
-const lightboxPrev = document.querySelector(".lightbox_prev");
 lightboxPrev.addEventListener("click", (e) =>{ 
-     PreviousMedia()
+    PreviousMedia()
 });
 
-const lightboxClose = document.querySelector(".lightbox_close");
 lightboxClose.addEventListener("click",(e) =>{
-  CloseLightbox();
+    CloseLightbox();
 });
 
-const body2 = document.querySelector('body')
-body2.addEventListener('keydown', (e) => {
+lightboxClose.addEventListener("keydown", (e) => {
+  if(e.key == "Enter"){ 
+    CloseLightbox();
+  }
+  if(e.key == "Tab"){
+    lightbox.focus();
+  }
+})
+
+lightbox.addEventListener('keydown', (e) => {
     if(e.key == "Escape" && IsLightboxOpen){
       CloseLightbox();
     }
@@ -165,6 +174,7 @@ function loadImage(TypeMedia, LinkMedia, TitleMedia){
       lightboxVideo.style.display = "none";
       lightboxImage.style.display = "block";
       lightboxImage.src = LinkMedia;
+      lightboxImage.setAttribute("alt", `image de ${TitleMedia}`)
       break;
     case 'video': case 'VIDEO':
       lightboxImage.style.display = "none";
@@ -212,7 +222,7 @@ function PreviousMedia(){
 }
 
 function CloseLightbox(){
-  const lightbox = document.querySelector(".lightbox");
   lightbox.style.display = "none";
   IsLightboxOpen=false;
+  document.querySelector(".media-img").focus();
 }
