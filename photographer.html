@@ -9,8 +9,10 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header aria-label="entête de la page">
-      <a href="index.html" tabindex="-1"><img src="assets/images/logo.png" class="logo" tabindex="1" alt="logo Fisheye" /></a>
+    <header>
+      <a href="./index.html" class="homepage" tabindex="-1" aria-label="Lien vers la page d'accueil">
+        <img src="assets/images/logo.png" class="logo" tabindex="1" alt="Fisheye home page" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -28,22 +30,22 @@
         <!-- affichage des medias du photographe -->
       </section>
 
-      <div class="encart-likes"> 
+      <div class="encart-likes" tabindex="4"> 
         <!-- affichage de l'encart des Likes -->
       </div>
     </main>
-
-    <div id="contact_modal" tabindex="-1">   <!--contact Modal -->
+        <!--      contact Modal -->
+    <div id="contact_modal" tabindex="-1">  
 			<div class="modal" tabindex="1">
 				<header >
           <h2 tabindex="1" id="name_photographer">Contactez-moi <br></h2>
           <img id="closeIcon" tabindex="2" src="assets/icons/close.svg" alt="close modal" />
         </header>
         
-				<form id="Myform">
+				<form id="Myform" role="formulaire de contact">
 					<div >
 						<label tabindex="1" for="prenom">Prénom</label>
-						<input tabindex="1" type="text" id="prenom" />
+						<input tabindex="1" type="text" id="prenom"/>
             <span class="ErrPrenom"> « Veuillez entrer un Prénom valide »</span>
 					</div>
           <div>
@@ -61,13 +63,13 @@
 						<textarea tabindex="1" id="message" name="message"></textarea>
             <span class="ErrMessage">« Veuillez entrer un message de 10 caractères minimum »</span>
 					</div>
-          <input tabindex="1" type="button" class="contact_button" value="Envoyer" onclick="envoyer()" >
+          <input tabindex="1" type="button" class="envoyer_button" value="Envoyer">
 				</form>
 			</div>
 		</div>
 
-    <div class="lightbox" tabindex="0" aria-label="image closeup view">                    <!--  lightBox -->
-     <div class="lightbox_img_container" tabindex="0" aria-label="vue rapproché du media">
+    <div class="lightbox" tabindex="0" aria-label="vue rapproché du media">                    <!--  lightBox -->
+     <div class="lightbox_img_container" tabindex="0">
         <img class="lightbox_img" src="" alt="" tabindex="0">
         <video class="lightbox_video" controls src="" tabindex="0" > </video>
       </div>

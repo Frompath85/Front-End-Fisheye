@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 function photographerFactory(data) {
     const {id, name, portrait , tagline, city, country, price} = data;
 
@@ -116,18 +118,22 @@ function MediaFactory(media, nameOfPhotographe){
 
         const iconHeart = document.createElement("i");
         iconHeart.setAttribute("class","fa-solid fa-heart");
+        iconHeart.setAttribute("aria-label","likes")
         iconHeart.setAttribute("tabindex","7");
-      //  ajout des likes au click et au clavier
-        const AllLikes = document.getElementById("Likes");
-        iconHeart.addEventListener("click",(e) => {
+        //  ajout des likes au click et au clavier
+        iconHeart.addEventListener("click",() => {
                 pLikes.innerHTML ++;
+                const AllLikes = document.getElementById("AllLikes");
                 AllLikes.innerHTML ++; 
+                
         });
         iconHeart.addEventListener("keydown",(e) => {
-            if(e.key == "Enter"){
-                pLikes.innerHTML ++;
-                AllLikes.innerHTML ++; 
+            if(e.key != "Enter"){
+                return;
             }
+            pLikes.innerHTML ++;
+            const AllLikes = document.getElementById("AllLikes");
+            AllLikes.innerHTML ++; 
         });
         iconHeart.addEventListener("mouseenter",() => { 
             iconHeart.style.cursor = "pointer";    

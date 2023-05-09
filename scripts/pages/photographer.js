@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
 async function getOnePhotographer() {
    //recherche des données du ficher json
@@ -39,6 +41,11 @@ async function displayPhotographe(){
 
 displayPhotographe();
 
+document.querySelector(".homepage").addEventListener("keydown", (e) => {
+  if(e.key == "Enter")
+    window.location.href = "./index.html";
+});
+
 async function getAllMedia(){
   //je recupere les données
   const req = await fetch('./data/photographers.json');
@@ -67,8 +74,8 @@ async function displaymedia(dataMedia){
 function encartLikes(NbrLikes, price){
   //html de la partie encart des likes
   const codeEncart = `<div>
-                        <p id="Likes"> ${NbrLikes} </p> 
-                        <i class="fa-solid fa-heart"></i>
+                        <p id="AllLikes"> ${NbrLikes} </p> 
+                        <i class="fa-solid fa-heart" aria-label="likes"></i>
                       </div>
                       <p> ${price} €/jour</p>`
   document.querySelector(".encart-likes").insertAdjacentHTML('afterbegin',codeEncart);
@@ -131,18 +138,19 @@ function byName(a, b) {// par ordre alphabetique
    //je laisse une trace du derneir Media affiché
   let LastTypeMedia ="";
   let LastLinkMedia = "";
+  // eslint-disable-next-line no-unused-vars
   let LastTitleMedia = "";
   let IsLightboxOpen = false
 
-lightboxNext.addEventListener("click", (e) =>{ 
+lightboxNext.addEventListener("click", () =>{ 
     NextMedia();
 });
 
-lightboxPrev.addEventListener("click", (e) =>{ 
+lightboxPrev.addEventListener("click", () =>{ 
     PreviousMedia()
 });
 
-lightboxClose.addEventListener("click",(e) =>{
+lightboxClose.addEventListener("click",() =>{
     CloseLightbox();
 });
 
