@@ -30,45 +30,45 @@
         <!-- affichage des medias du photographe -->
       </section>
 
-      <div class="encart-likes" tabindex="4"> 
+      <div class="encart-likes" tabindex="4" role="encart-likes"> 
         <!-- affichage de l'encart des Likes -->
       </div>
     </main>
         <!--      contact Modal -->
-    <div id="contact_modal" tabindex="-1">  
-			<div class="modal" tabindex="1">
+    <div id="contact_modal" tabindex="-1" role="contact_modal">  
+			<div class="modal" tabindex="1" aria-labelledby="name_photographer">
 				<header >
           <h2 tabindex="1" id="name_photographer">Contactez-moi <br></h2>
-          <img id="closeIcon" tabindex="2" src="assets/icons/close.svg" alt="close modal" />
+          <img id="closeIcon" tabindex="2" src="assets/icons/close.svg" alt="close modal" >
         </header>
         
 				<form id="Myform" role="formulaire de contact">
-					<div >
+					<div role="prenom">
 						<label tabindex="1" for="prenom">Prénom</label>
-						<input tabindex="1" type="text" id="prenom"/>
+						<input tabindex="1" type="text" id="prenom" aria-labelledby="prenom"/>
             <span class="ErrPrenom"> « Veuillez entrer un Prénom valide »</span>
 					</div>
-          <div>
+          <div role="nom">
 						<label tabindex="1" for="nom">Nom</label>
-						<input tabindex="1"  type="text" id="nom"/>
+						<input tabindex="1"  type="text" id="nom" aria-labelledby="nom"/>
             <span class="ErrNom">« Veuillez entrer un Nom valide »</span>
 					</div>
-          <div>
+          <div role="email">
 						<label tabindex="1" for="email">Email</label>
-						<input tabindex="1" type="email" id="email"/>
+						<input tabindex="1" type="email" id="email" aria-labelledby="email"/>
             <span class="ErrEmail"> « Veuillez entrer une adresse e-mail valide »</span>
 					</div>
-          <div>
+          <div role="message">
 						<label tabindex="1" for="message">Votre message </label>
-						<textarea tabindex="1" id="message" name="message"></textarea>
+						<textarea tabindex="1" id="message" name="message" aria-labelledby="message"></textarea>
             <span class="ErrMessage">« Veuillez entrer un message de 10 caractères minimum »</span>
 					</div>
-          <input tabindex="1" type="button" class="envoyer_button" value="Envoyer">
+          <input tabindex="1" type="button" class="envoyer_button" value="Envoyer" aria-label="envoyer le formulaire pour contacter le photographe">
 				</form>
 			</div>
 		</div>
 
-    <div class="lightbox" tabindex="0" aria-label="vue rapproché du media">                    <!--  lightBox -->
+    <div class="lightbox" tabindex="0" aria-label="vue rapproché du media" role="lightbox">                    <!--  lightBox -->
      <div class="lightbox_img_container" tabindex="0">
         <img class="lightbox_img" src="" alt="" tabindex="0">
         <video class="lightbox_video" controls src="" tabindex="0" > </video>
